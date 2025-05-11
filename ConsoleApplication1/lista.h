@@ -8,10 +8,14 @@ private:
 	nodo* actual;
 public:
 	lista();
+	lista(lista& listaCopia);
+	~lista();
+	lista& operator=(lista& listaCopia);
 	void insertarInicio(estudiante*);
 	string toString();
 	bool listaVacia();
 	int cuentaNodos();
 	bool eliminaInicio();
-	~lista();
+	bool operator==(lista& listaCopia);
+    estudiante* operator[](int index);
 };

@@ -1,8 +1,21 @@
 #include "lista.h"
 //-------------------------------------------------
 lista::lista() {
-	primero = NULL;
-	actual = NULL;
+	primero = nullptr;
+	actual = nullptr;
+}
+lista::lista(lista& listaCopia)
+{
+	primero = nullptr;
+	actual = nullptr;
+	nodo* nodoCopia = listaCopia.primero;
+	while (nodoCopia != nullptr) {
+		estudiante* e = new estudiante(nodoCopia->getEstu()->getNombre(), nodoCopia->getEstu()->getCedula(), nodoCopia->getEstu()->getNota());
+		insertarInicio(e);
+		nodoCopia = nodoCopia->getSig();
+	}
+	actual = primero;
+	actual = actual->getSig();
 }
 //-------------------------------------------------
 void lista::insertarInicio(estudiante*  e) {
@@ -13,7 +26,7 @@ string lista::toString() {
 	actual = primero;
 	stringstream  s;
 
-	while (actual != NULL){
+	while (actual != nullptr){
 		s << actual->toStringNodo();
 		actual = actual->getSig();
 	}
@@ -22,12 +35,12 @@ string lista::toString() {
 
 //-----------------------------------------------
 bool lista::listaVacia(){
-	if (primero == NULL) { return true; }
+	if (primero == nullptr) { return true; }
 	return false;
 }
 //-----------------------------------------------
 bool lista::eliminaInicio(){
-	if (primero == NULL) { // caso 1: lista vacia
+	if (primero == nullptr) { // caso 1: lista vacia
 		return false;
 	}
 	else {// caso 2: lista NO vacia
@@ -38,12 +51,45 @@ bool lista::eliminaInicio(){
 	}
 }
 
+bool lista::operator==(lista& listaCopia)
+{
+	if (this->cuentaNodos() != listaCopia.cuentaNodos()) {
+		return false;
+	}
+	actual = primero;
+	nodo* nodoCopia = listaCopia.primero;
+	while (actual != nullptr && nodoCopia != nullptr) {
+		if (*actual->getEstu() != *nodoCopia->getEstu()) {
+			return false;
+		}
+		actual = actual->getSig();
+		nodoCopia = nodoCopia->getSig();
+	}
+	return true;
+}
+
+estudiante* lista::operator[](int index)
+{
+	actual = primero;
+	int i = 0;
+	while (actual != nullptr && i < index) {
+		actual = actual->getSig();
+		i++;
+	}
+	if (actual != nullptr) {
+		return actual->getEstu();
+	}
+	else {
+		return nullptr;
+	}
+}
+
 //----------------------------------------------
 int lista::cuentaNodos() {
 	actual = primero;
 	int can = 0;
 
-	while (actual != NULL){
+	while (actual != nullptr){
 		actual = actual->getSig();
 		can++;
 	}
@@ -55,4 +101,22 @@ lista::~lista() {
 	while (!listaVacia()) {
 		eliminaInicio();
 	}
+}
+
+lista& lista::operator=(lista& listaCopia)
+{
+	if (this != &listaCopia) {
+		while (!listaVacia()) {
+			eliminaInicio();
+		}
+		nodo* nodoCopia = listaCopia.primero;
+		while (nodoCopia != nullptr) {
+			estudiante* e = new estudiante(nodoCopia->getEstu()->getNombre(), nodoCopia->getEstu()->getCedula(), nodoCopia->getEstu()->getNota());
+			insertarInicio(e);
+			nodoCopia = nodoCopia->getSig();
+		}
+		actual = primero;
+		actual = actual->getSig();
+	}
+	return *this;
 }
