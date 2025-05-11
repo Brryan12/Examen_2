@@ -7,7 +7,9 @@ nodo::nodo(estudiante*  e, nodo* s) {
 }
 //-------------------------------------------------
 nodo::~nodo() {
-	delete estu;
+	if (estu != nullptr) {
+		delete estu;
+	}
 }
 //-------------------------------------------------
 void nodo::setEstu(estudiante* e) {
@@ -23,7 +25,7 @@ void nodo::setSig(nodo*  s) {
 }
 //-------------------------------------------------
 nodo* nodo::getSig() {
-	return sig;
+	return this ? sig : nullptr;
 }
 //-------------------------------------------------
 string nodo::toStringNodo() {

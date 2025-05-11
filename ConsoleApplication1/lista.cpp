@@ -53,19 +53,24 @@ bool lista::eliminaInicio(){
 
 bool lista::operator==(lista& listaCopia)
 {
-	if (this->cuentaNodos() != listaCopia.cuentaNodos()) {
-		return false;
-	}
 	actual = primero;
+	bool igual=false;
 	nodo* nodoCopia = listaCopia.primero;
-	while (actual != nullptr && nodoCopia != nullptr) {
-		if (*actual->getEstu() != *nodoCopia->getEstu()) {
-			return false;
+	while (actual != nullptr) {
+		while (nodoCopia != nullptr) {
+			if (actual != nodoCopia) {
+				nodoCopia = nodoCopia->getSig();
+			}
+			if (actual == nodoCopia) {
+				igual = true;
+			}
+			else {
+				igual = false;
+			}
 		}
 		actual = actual->getSig();
-		nodoCopia = nodoCopia->getSig();
 	}
-	return true;
+	return igual;
 }
 
 estudiante* lista::operator[](int index)

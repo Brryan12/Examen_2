@@ -19,7 +19,6 @@ int main(){
 	l1->insertarInicio(e5);
 
 	cout << l1->toString();
-	l1->insertarInicio(e1);
 	//--------------------------------------------------------
 
 	// Pruebe lo realizado aqui
@@ -40,6 +39,37 @@ int main(){
 	else
 		cout << "Son iguales" << endl;
 
+	lista* l2 = new lista();
+	l2->operator=(*l1);
+	cout << "Lista 1: \n" << l1->toString();
+	cout << "Lista 2: \n"<< l2->toString();
+	if (l1->operator==(*l2))
+		cout << "Son iguales" << endl;
+	else
+		cout << "No son iguales" << endl;
+	lista* l3 = new lista();
+	l3->insertarInicio(e1);
+	l3->insertarInicio(e2);
+	l3->insertarInicio(e3);
+	if (l1->operator==(*l3))
+		cout << "Son iguales" << endl;
+	else
+		cout << "No son iguales" << endl;
+	cout << "Lista 1 por operador []: \n";
+	cout << l1->operator[](2)->toString();
+	cout << "Lista 2 por operador []: \n";
+	cout << l2->operator[](2)->toString();
+	cout << "Estudiante por operador <<: \n";
+	cout << *e2;
+	cout << "Estudiante por operador >>: \n\n";
+	estudiante* e6 = new estudiante();
+	cin >> *e6;
+	cout << "Estudiante recien creado: \n\n";
+	cout << *e6;
+
 	cin.get();
+	delete l1;
+	delete l2;
+	delete e6;
 	return 0;
 }

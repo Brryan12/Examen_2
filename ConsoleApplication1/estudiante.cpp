@@ -7,7 +7,9 @@ estudiante::estudiante(string nombre, string cedula, int nota){
 	this->nota = nota;
 }
 //-------------------------------------------------
-estudiante::~estudiante(){}
+estudiante::~estudiante(){
+
+}
 //-------------------------------------------------
 string estudiante::getNombre() { return nombre;}
 string estudiante::getCedula() { return cedula; }
