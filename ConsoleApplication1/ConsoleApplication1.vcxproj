@@ -77,13 +77,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Analizador.cpp" />
     <ClCompile Include="estudiante.cpp" />
+    <ClCompile Include="Iterador.cpp" />
     <ClCompile Include="lista.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="nodo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Analizador.h" />
     <ClInclude Include="estudiante.h" />
+    <ClInclude Include="Iterador.h" />
     <ClInclude Include="lista.h" />
     <ClInclude Include="nodo.h" />
   </ItemGroup>
